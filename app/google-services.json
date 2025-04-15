@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "804191510722",
+    "project_id": "gotrip-cbb78",
+    "storage_bucket": "gotrip-cbb78.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804191510722:android:373e7c9815607dd88edb5b",
+        "android_client_info": {
+          "package_name": "com.example.gotrip"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOkmWYRAapsgo9s301q-wTE-dg76X8xq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
