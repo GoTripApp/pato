@@ -1,9 +1,10 @@
-package com.example.gotrip; // Change to your actual package name
+package com.example.gotrip;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Patterns;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
@@ -13,25 +14,33 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText usernameEditText, passwordEditText, emailEditText;
     CheckBox agreeCheckBox;
     MaterialButton registerButton, loginButton;
+    private boolean isPasswordVisible = false;
+
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Make the activity fullscreen
-        //Enable full-screen mode
+        // Fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main); // Ensure this matches your XML layout file
 
-        // Bind UI elements to variables
+        setContentView(R.layout.activity_main);
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
+        // Bind views
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
         emailEditText = findViewById(R.id.email);
@@ -39,60 +48,38 @@ public class MainActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.RegisterButton);
         loginButton = findViewById(R.id.LoginButton);
 
-        // Register Button Click
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleRegister();
-            }
+        // Register click
+        registerButton.setOnClickListener(v -> handleRegister());
+
+        // Login click
+        loginButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
 
-        // Login Button Click
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // For now, just show a toast
-                Toast.makeText(MainActivity.this, "Redirecting to Login...", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // Add a touch listener to the password EditText to detect clicks on the eye icon
-        passwordEditText.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int drawableRight = 2; // The index for drawableEnd (right side icon)
-
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    // Check if the user clicked on the eye icon (drawableEnd)
-                    if (event.getRawX() >= (passwordEditText.getRight() - passwordEditText.getCompoundDrawables()[drawableRight].getBounds().width())) {
-                        togglePasswordVisibility();
-                        return true;
-                    }
+        // Toggle password visibility
+        passwordEditText.setOnTouchListener((v, event) -> {
+            int drawableRight = 2;
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getRawX() >= (passwordEditText.getRight()
+                        - passwordEditText.getCompoundDrawables()[drawableRight].getBounds().width())) {
+                    togglePasswordVisibility();
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
     }
 
-    private boolean isPasswordVisible = false;
-
     private void togglePasswordVisibility() {
         if (isPasswordVisible) {
-            // Hide password
-            passwordEditText.setInputType(android.text.InputType.TYPE_CLASS_TEXT |
-                    android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.eye_slash_svgrepo_com, 0);
         } else {
-            // Show password
-            passwordEditText.setInputType(android.text.InputType.TYPE_CLASS_TEXT |
-                    android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.eye_slash_svgrepo_com, 0);
         }
-
-        // Keep the cursor at the end of the text
         passwordEditText.setSelection(passwordEditText.getText().length());
-
-        // Toggle the flag
         isPasswordVisible = !isPasswordVisible;
     }
 
@@ -101,19 +88,59 @@ public class MainActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
 
-        if (username.isEmpty() || password.isEmpty() || email.isEmpty()) {
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-            return;
+        boolean hasError = false;
+
+        // Reset backgrounds
+        usernameEditText.setBackgroundResource(R.drawable.editextbg);
+        emailEditText.setBackgroundResource(R.drawable.editextbg);
+        passwordEditText.setBackgroundResource(R.drawable.editextbg);
+
+        // Validation
+        if (username.isEmpty()) {
+            usernameEditText.setBackgroundResource(R.drawable.error_bg);
+            hasError = true;
+        }
+
+        if (email.isEmpty() || !isValidEmail(email)) {
+            emailEditText.setBackgroundResource(R.drawable.error_bg);
+            hasError = true;
+        }
+
+        if (password.isEmpty() || !isValidPassword(password)) {
+            passwordEditText.setBackgroundResource(R.drawable.error_bg);
+            hasError = true;
         }
 
         if (!agreeCheckBox.isChecked()) {
             Toast.makeText(this, "You must agree to the Terms and Privacy Policy", Toast.LENGTH_SHORT).show();
+            hasError = true;
+        }
+
+        if (hasError) {
+            Toast.makeText(this, "Please fix the highlighted fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Success
-        Toast.makeText(this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
+        // Register user with Firebase
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Toast.makeText(MainActivity.this, "Registered Successfully! Redirecting to Login...", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        finish();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
 
-        // You can add code to actually register the user (e.g., Firebase, API, etc.)
+    private boolean isValidEmail(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private boolean isValidPassword(String password) {
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$";
+        return password.matches(regex);
     }
 }

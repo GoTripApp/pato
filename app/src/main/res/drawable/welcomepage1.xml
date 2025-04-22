@@ -1,0 +1,13 @@
+<!-- res/drawable/welcomepage1.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background shape or image -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#5D85A9" /> <!-- example background -->
+        </shape>
+    </item>
+
+    <!-- Centered arrow icon -->
+    <item android:drawable="@drawable/arrowko_24"
+        android:gravity="center" />
+</layer-list>

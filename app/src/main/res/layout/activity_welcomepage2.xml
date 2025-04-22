@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFCEB"
+    android:padding="16dp"
+    tools:context=".welcomepage2">
+
+    <!-- Image Container with City & Bus -->
+    <FrameLayout
+        android:id="@+id/imageContainer"
+        android:layout_width="356dp"
+        android:layout_height="420dp"
+        android:layout_centerHorizontal="true"
+        >
+
+        <ImageView
+            android:id="@+id/cityImage"
+            android:layout_width="match_parent"
+            android:layout_height="493dp"
+            android:contentDescription="City"
+            android:paddingBottom="80dp"
+            android:src="@drawable/bgsabus" />
+
+        <ImageView
+            android:id="@+id/busImage"
+            android:layout_width="match_parent"
+            android:layout_height="241dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/bus" />
+    </FrameLayout>
+
+    <!-- Welcome Text -->
+    <LinearLayout
+        android:id="@+id/welcomeContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageContainer"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:id="@+id/welcomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="&quot;Your Journey Starts Here!&quot;"
+            android:textColor="#5D85A9"
+            android:layout_marginStart="10dp"
+            android:textSize="28dp"
+            android:textStyle="bold" />
+
+
+
+    </LinearLayout>
+
+
+    <!-- Description Text -->
+    <TextView
+        android:id="@+id/descriptionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcomeContainer"
+        android:layout_centerHorizontal="true"
+        android:text="Find your bus. Track your trip.\nGo anywhere"
+        android:textColor="#000000"
+        android:textSize="26dp"
+        android:gravity="center" />
+
+    <!-- Circular Button with Arrow -->
+    <ImageButton
+        android:id="@+id/nextButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/welcomepage1"
+        android:src="@drawable/arrowko_24"
+        android:scaleType="centerInside"
+        android:contentDescription="Next"/>
+
+</RelativeLayout>
