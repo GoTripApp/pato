@@ -45,12 +45,14 @@
         <TextView
             android:id="@+id/welcomeText"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="&quot;Your Journey Starts Here!&quot;"
             android:textColor="#5D85A9"
             android:layout_marginStart="10dp"
-            android:textSize="28dp"
-            android:textStyle="bold" />
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/merriweather_bold"/>
 
 
 
@@ -66,8 +68,9 @@
         android:layout_centerHorizontal="true"
         android:text="Find your bus. Track your trip.\nGo anywhere"
         android:textColor="#000000"
-        android:textSize="26dp"
-        android:gravity="center" />
+        android:textSize="22sp"
+        android:gravity="center"
+        android:fontFamily="@font/merriweather_regular"/>
 
     <!-- Circular Button with Arrow -->
     <ImageButton

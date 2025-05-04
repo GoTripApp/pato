@@ -9,11 +9,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
+        android:minHeight="400dp"
         android:background="@drawable/bg"
         android:orientation="vertical"
         android:padding="16dp">
-
 
         <TextView
             android:id="@+id/intro_text"
@@ -24,16 +24,16 @@
             android:layout_marginEnd="10dp"
             android:text="Create a new account to get started."
             android:textColor="@color/white"
-            android:textSize="24dp"
-            android:textStyle="bold" />
-
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/merriweather_bold"/>
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="140dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         app:cardCornerRadius="50dp"
@@ -42,10 +42,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="520dp"
-            android:orientation="vertical"
-
-            android:padding="10dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView"
@@ -54,8 +52,9 @@
                 android:text="Sign Up"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/merriweather_bold"/>
 
             <View
                 android:layout_width="match_parent"
@@ -66,11 +65,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-
                 android:text="User Name"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/merriweather_bold"/>
 
             <EditText
                 android:id="@+id/username"
@@ -80,10 +79,7 @@
                 android:layout_marginEnd="50dp"
                 android:background="@drawable/editextbg"
                 android:padding="10dp"
-                android:textColor="@color/black"
-
-                />
-
+                android:textColor="@color/black"/>
 
             <!-- Password -->
             <TextView
@@ -93,9 +89,9 @@
                 android:layout_marginTop="16dp"
                 android:text="Password"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/merriweather_bold"/>
 
             <EditText
                 android:id="@+id/password"
@@ -105,10 +101,9 @@
                 android:layout_marginEnd="50dp"
                 android:background="@drawable/editextbg"
                 android:drawableEnd="@drawable/eye_slash_svgrepo_com"
-                android:drawableRight="@drawable/eye_slash_svgrepo_com"
                 android:inputType="textPassword"
                 android:padding="10dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"/>
 
             <!-- Email -->
             <TextView
@@ -118,8 +113,9 @@
                 android:layout_marginTop="16dp"
                 android:text="Email Address"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/merriweather_bold"/>
 
             <EditText
                 android:id="@+id/email"
@@ -130,7 +126,7 @@
                 android:background="@drawable/editextbg"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -145,29 +141,31 @@
                     android:text="I agree to the Terms of Service and Privacy Policy"
                     android:layout_centerVertical="true"
                     android:textStyle="bold"
-                    android:textSize="15dp"
-                    android:alpha="0.7"/>
+                    android:textSize="14sp"
+                    android:textColor="#B3000000"
+                    android:fontFamily="@font/merriweather_bold"/>
             </RelativeLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/RegisterButton"
                 android:layout_width="214dp"
                 android:layout_height="wrap_content"
-
                 android:layout_gravity="center"
                 android:backgroundTint="#43b3e0"
                 android:text="Register Now"
                 android:textColor="@color/black"
-                android:textSize="20dp"
-                app:cornerRadius="15dp" />
+                android:textSize="18sp"
+                app:cornerRadius="15dp"
+                android:fontFamily="@font/merriweather_regular"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Already have an account?"
                 android:layout_gravity="center"
-                android:textSize="18dp"
+                android:textSize="16sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/merriweather_bold"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"/>
 
@@ -179,22 +177,20 @@
                 android:backgroundTint="#43b3e0"
                 android:text="Log in here"
                 android:textColor="@color/black"
-                android:textSize="20dp"
-                app:cornerRadius="15dp" />
-
-
+                android:textSize="18sp"
+                app:cornerRadius="15dp"
+                android:fontFamily="@font/merriweather_regular"/>
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
+
     <LinearLayout
         android:id="@+id/social_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/card_view"
-        android:layout_marginTop="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginBottom="24dp">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -202,21 +198,18 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="Or sign up with"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:fontFamily="@font/merriweather_bold"/>
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
+            android:layout_marginStart="10dp"
             android:layout_gravity="center"
-            android:src="@drawable/google" />
+            android:src="@drawable/google"/>
     </LinearLayout>
-
-
-
 
 
 </RelativeLayout>

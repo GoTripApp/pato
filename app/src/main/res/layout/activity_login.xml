@@ -13,6 +13,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+
         <TextView
             android:id="@+id/intro_text"
             android:layout_width="match_parent"
@@ -23,7 +24,8 @@
             android:text="Welcome back, log in to continue."
             android:textColor="@color/white"
             android:textSize="24dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/merriweather_bold"/>
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
@@ -50,7 +52,8 @@
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/merriweather_bold"/>
 
             <View
                 android:layout_width="match_parent"
@@ -61,10 +64,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:text="Username"
+                android:text="Email"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/merriweather_bold"/>
 
             <EditText
                 android:id="@+id/login_username"
@@ -85,7 +89,8 @@
                 android:text="Password"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/merriweather_bold"/>
 
             <EditText
                 android:id="@+id/login_password"
@@ -109,7 +114,8 @@
                 android:text="Log In"
                 android:textColor="@color/black"
                 android:textSize="20dp"
-                app:cornerRadius="15dp" />
+                app:cornerRadius="15dp"
+                android:fontFamily="@font/merriweather_regular"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -119,7 +125,8 @@
                 android:text="Don't have an account?"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:fontFamily="@font/merriweather_bold"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/RegisterNowButton"
@@ -130,7 +137,8 @@
                 android:text="Register Here"
                 android:textColor="@color/black"
                 android:textSize="20dp"
-                app:cornerRadius="15dp" />
+                app:cornerRadius="15dp"
+                android:fontFamily="@font/merriweather_regular"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

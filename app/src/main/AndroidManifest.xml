@@ -9,28 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GoTrip">
-
+        <activity
+            android:name=".Dashboard"
+            android:exported="false" />
         <!-- Welcome Page 1 (FIRST TO OPEN) -->
         <activity
             android:name=".WelcomePage1"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Welcome Page 2 -->
+        </activity> <!-- Welcome Page 2 -->
         <activity
             android:name=".welcomepage2"
-            android:exported="false" />
-
-        <!-- Login Activity -->
+            android:exported="false" /> <!-- Login Activity -->
         <activity
             android:name=".LoginActivity"
-            android:exported="true" />
-
-        <!-- Main Activity or Home Page after login -->
+            android:exported="true" /> <!-- Main Activity or Home Page after login -->
         <activity
             android:name=".MainActivity"
             android:exported="true" />
